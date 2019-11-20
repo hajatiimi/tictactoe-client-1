@@ -101,8 +101,11 @@ def tictactoe_client(host, port):
   if response:
     response = response.split()
     if response[0] == "GAME-READY":
-      grid_size = int(response[1])
-      opponent = response[2]
+      rows = int(response[1])
+      columns = int(response[2])
+      assert rows == columns, "expected a square grid"
+      grid_size = rows
+      opponent = response[3]
       game = tictactoe_game(grid_size)
       send("GAME-READY-ACK")
 
